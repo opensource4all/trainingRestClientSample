@@ -37,6 +37,10 @@ public class OpenNotifyServiceTest {
         ResponseEntity<OpenNotifyAstrosResponse> openNotifyResponseEntity = openNotifyService.getOpenNotifyResponseEntity();
         assertEquals(openNotifyResponseEntity.getStatusCode(), HttpStatus.OK);
         logger.info(openNotifyResponseEntity.toString());
+    }
+
+    public void loadAstrosInSqliteDb() {
 
     }
+
 }
