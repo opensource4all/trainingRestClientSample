@@ -18,6 +18,17 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <repositories>
+        <repository>
+            <id>sqlite-dialect-mvn-repo</id>
+            <url>https://raw.github.com/opensource4all/sqlite-dialect/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -91,12 +102,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate.dialect</groupId>
-            <artifactId>sqlite-dialect</artifactId>
-            <version>0.1.0</version>
-        </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate.dialect</groupId>-->
+            <!--<artifactId>sqlite-dialect</artifactId>-->
+            <!--<version>0.1.0</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 
