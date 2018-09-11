@@ -1,10 +1,13 @@
 package com.opensource4all.restclient.entities;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@Data
 public class Joke {
     @Id
     @GeneratedValue
@@ -14,21 +17,4 @@ public class Joke {
     public Joke(String joke) {
         this.joke = joke;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getJoke() {
-        return joke;
-    }
-
-    public void setJoke(String joke) {
-        this.joke = joke;
-    }
-
 }

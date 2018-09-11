@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import java.time.Duration;
 
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
@@ -32,6 +35,8 @@ public class JokeServiceTest {
     private JokeService service;
     @Autowired @Qualifier("jokeJpa")
     JokeJpa jokeJpa;
+    @Mock
+    private JokeService jokeServiceMock;
 
 
     @Test
@@ -39,7 +44,6 @@ public class JokeServiceTest {
         String joke = service.getJokeSync("foo","bar");
         logger.info(joke);
         assertTrue(joke.contains("foo") || joke.contains("bar"));
-
     }
 
     @Test
@@ -57,8 +61,15 @@ public class JokeServiceTest {
         logger.info(" In getJokeAsync with a joke: " + joke);
         Joke jokeAfter = jokeJpa.save(new Joke(joke));
         assertNotNull(jokeAfter.getId());
-
     }
 
+    @Test
+    public void testJokeServiceMockito() {
+        jokeServiceMock.getJokeAsync("first", "last");
+        String stringExpected = "George Smith likes to code in Kotlin now because it's cool.";
+        when(jokeServiceMock.getJokeSync("George", "Smith")).thenReturn(stringExpected);
+        logger.info(jokeServiceMock.getJokeSync("George","Smith"));
+        assertEquals(stringExpected, jokeServiceMock.getJokeSync("George", "Smith"));
+    }
 
 }
