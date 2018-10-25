@@ -1,6 +1,8 @@
 package com.opensource4all.restclient.services;
 
 import com.opensource4all.restclient.json.JokeResponse;
+import com.opensource4all.restclient.properties.RestClientProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import reactor.core.publisher.Mono;
 public class JokeService {
     private RestTemplate template;
     private WebClient client = WebClient.create("http://api.icndb.com");
+    @Autowired
+    RestClientProperties restClientProperties;
 
     // if ,and only if, you have a single constructor, spring will autowire RestTemplateBuilder
     public JokeService(RestTemplateBuilder builder) {
@@ -19,14 +23,13 @@ public class JokeService {
     }
 
     public String getJokeSync(String first, String last) {
-        String base = "http://api.icndb.com/jokes/random?limitTo=[nerdy]";
-        String url = base + "&firstName=" + first + "&lastName=" + last;
+        String url = restClientProperties.getJokeServiceBase() + "&firstName=" + first + "&lastName=" + last;
         return template.getForObject(url, JokeResponse.class)
                 .getValue().getJoke();
     }
 
     public Mono<String> getJokeAsync(String first, String last) {
-        String path = "/jokes/random?limitTo=[nerdy]&firstName={first}&lastName={last}";
+        String path = restClientProperties.getJokeServiceBase() + "&firstName={first}&lastName={last}";
         return client.get()
                 .uri(path, first, last)
                 .cookie("X-SESSION","cool")
