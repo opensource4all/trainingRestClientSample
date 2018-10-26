@@ -75,8 +75,8 @@
 
         <dependency>
             <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc-cerod-wl</artifactId>
-            <version>3.23.1-SNAPSHOT</version>
+            <artifactId>sqlite-jdbc-ext</artifactId>
+            <version>3.24.0-R18-09-14</version>
         </dependency>
         <!--<dependency>-->
             <!--<groupId>org.xerial</groupId>-->
