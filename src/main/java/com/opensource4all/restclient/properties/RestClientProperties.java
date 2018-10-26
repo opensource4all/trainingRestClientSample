@@ -11,5 +11,6 @@ import org.springframework.context.annotation.Configuration;
 public class RestClientProperties {
     String astrosUrl;
     String jokeServiceBase;
+    String clientBase;
 
 }

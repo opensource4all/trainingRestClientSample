@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class JokeService {
     private RestTemplate template;
-    private WebClient client = WebClient.create("http://api.icndb.com");
+
     @Autowired
     RestClientProperties restClientProperties;
 
@@ -30,6 +30,7 @@ public class JokeService {
 
     public Mono<String> getJokeAsync(String first, String last) {
         String path = restClientProperties.getJokeServiceBase() + "&firstName={first}&lastName={last}";
+        WebClient client = WebClient.create(restClientProperties.getClientBase());
         return client.get()
                 .uri(path, first, last)
                 .cookie("X-SESSION","cool")
