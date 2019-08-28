@@ -19,7 +19,7 @@ public class JokeService {
 
     // if ,and only if, you have a single constructor, spring will autowire RestTemplateBuilder
     public JokeService(RestTemplateBuilder builder) {
-        template = builder.build();
+        template = builder.setConnectTimeout(5).setReadTimeout(5).build();
     }
 
     public String getJokeSync(String first, String last) {
