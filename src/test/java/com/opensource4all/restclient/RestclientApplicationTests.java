@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class RestclientApplicationTests {
+public class RestClientApplicationTests {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
